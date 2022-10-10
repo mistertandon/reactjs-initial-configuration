@@ -17,7 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "prettier": "npx prettier --write \"src/**/*.(ts|tsx)\"",
+    "prettier:fix": "npx prettier --write \"src/**/*.(ts|tsx)\"",
+    "prettier:check": "prettier --check \"src/**/*.(ts|tsx)\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
