@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.64",
@@ -19,6 +18,8 @@
   "scripts": {
     "prettier:fix": "npx prettier --write \"src/**/*.(ts|tsx)\"",
     "prettier:check": "prettier --check \"src/**/*.(ts|tsx)\"",
+    "test:ci": "npm run test -- --watchAll=false --coverage --reporters=default --reporters=jest-junit",
+    "test:coverage": "npm test -- --watchAll=false --coverage",
     "lint": "eslint \"src/**/*.{ts,tsx,js}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^13.4.0",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.2.0",
@@ -55,9 +57,10 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.0",
+    "jest-junit": "^14.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "husky": "^8.0.0"
+    "prettier": "^2.7.1"
   },
   "husky": {
     "hooks": {
@@ -68,5 +71,29 @@
     "src/**/*.{ts,tsx}": [
       "npm prettier:fix"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src/**/*.ts",
+      "./src/**/*.tsx",
+      "!./src/react-app-env.d.ts",
+      "!./src/reportWebVitals.ts",
+      "!./src/@types/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "./src/@types/",
+      "./public/",
+      "./coverage/",
+      "./src/index.ts"
+    ],
+    "coverageReporters": [
+      "html",
+      "text",
+      "lcov",
+      "text-summary"
+    ],
+    "transformIgnorePatterns": [
+    ],
+    "transform": {}
   }
 }
